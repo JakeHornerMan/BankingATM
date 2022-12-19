@@ -81,4 +81,8 @@ public class AccountService {
 			signedInAccount.setBalance(signedInAccount.getBalance() - withdraw);
 		}
 	}
+
+	public void deposit(int amount) {
+		signedInAccount.setBalance(signedInAccount.getBalance() + amount);
+	}
 }

@@ -34,10 +34,10 @@ public class Safe implements Serializable{
 	}
 	
 	public String displayTotalSafe() {
-		return "Safe holds = €"+ TotalInSafe();
+		return "Safe holds = €"+ totalInSafe();
 	}
 	
-	public int TotalInSafe() {
+	public int totalInSafe() {
 		int ans = (fiftys*50) + (twentys*20) + (tens*10) + (fives*5);
 		return ans;
 	}

@@ -14,15 +14,13 @@ public class SafeService {
 	@Autowired
 	private AccountService accountService;
 	
-	private Safe atmSafe;
+	private Safe atmSafe = new Safe(0,10,30,30,20);
 	
-	public void setAtmSafe(){
+	public void setAtmSafeDb(){
 		atmSafe = safeRepo.findById(1).get();
 	}
 	
 	public String displaySafeContents() {
-		setAtmSafe();
-		atmSafe = safeRepo.findById(1).get();
 		String ans = atmSafe.toString();
 		String ans2 = atmSafe.displayTotalSafe();
 		
@@ -30,7 +28,7 @@ public class SafeService {
 	}
 
 	public boolean IsSufficiantFundsInSafe(double withdrawAmount) {
-		if(withdrawAmount <= atmSafe.TotalInSafe()) {
+		if(withdrawAmount <= atmSafe.totalInSafe()) {
 			return true;
 		}
 		else {
@@ -39,10 +37,10 @@ public class SafeService {
 	}
 
 	public String withdraw(int withdrawAmount) {
-		setAtmSafe();
 		if(accountService.isCorrectFunds(withdrawAmount) && IsSufficiantFundsInSafe(withdrawAmount)) {
 			accountService.withdraw(withdrawAmount);
 			return calulateNotes(withdrawAmount);
+			
 		}
 		else {
 			if(!accountService.isCorrectFunds(withdrawAmount)) {
@@ -116,6 +114,8 @@ public class SafeService {
 		//5
 		int fives = ans/5;
 		removeFives(fives);
+		
+		safeRepo.save(atmSafe);
 		return "You are now recieving [fiftys= " +fiftys + ", twentys= " +twentys + ", tens=" + tens + ", fives=" + fives + "]";
 		
 	}
@@ -143,4 +143,26 @@ public class SafeService {
 	public int CalculatingHowManyNotes(int ans, int nomination) {
 		return ans;
 	}
+	
+	public String deposit(int fiftys, int twentys, int tens, int fives) {
+		if(accountService.isSignedIn()) {
+			Safe tempSafe = new Safe(0, fiftys, twentys, tens, fives);
+			int amount = tempSafe.totalInSafe();
+			accountService.deposit(amount);
+			addToSafe(tempSafe);
+			
+			return "Money deposoted into signed in Account: " + amount;
+		}
+		else {
+			return "Please sign in to an account.";
+		}
+	}
+
+	private void addToSafe(Safe tempSafe) {
+		atmSafe.setFiftys(atmSafe.getFiftys() + tempSafe.getFiftys());
+		atmSafe.setTwentys(atmSafe.getTwentys() + tempSafe.getTwentys());
+		atmSafe.setTens(atmSafe.getTens() + tempSafe.getTens());
+		atmSafe.setFives(atmSafe.getFives() + tempSafe.getFives());
+	}
+
 }

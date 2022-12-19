@@ -151,7 +151,7 @@ public class SafeService {
 			accountService.deposit(amount);
 			addToSafe(tempSafe);
 			
-			return "Money deposoted into signed in Account: " + amount;
+			return "Money deposited into signed in Account: " + amount;
 		}
 		else {
 			return "Please sign in to an account.";

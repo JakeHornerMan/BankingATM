@@ -39,7 +39,7 @@ public class Controller {
 		return accountService.signIn(accountNumber,pin);
 	}
 	
-	@GetMapping(path = "/signOut")
+	@GetMapping(value = "/signOut")
 	public String signOut(@PathVariable int accountNumber, @PathVariable int pin) {
 		return accountService.signOut();
 	}
@@ -51,11 +51,11 @@ public class Controller {
 	
 	@GetMapping(path = "/withdraw/{withdrawAmount}")
 	public String withdraw(@PathVariable int withdrawAmount) {
-		return safeService.withdraw(withdrawAmount) + "\n, New Account Balance: " + accountService.showBalance() + ", New Safe Balance: " + safeService.displaySafeContents();
+		return safeService.withdraw(withdrawAmount) + ",\n New Account Balance: " + accountService.showBalance() + ",\n New Safe Balance: " + safeService.displaySafeContents();
 	}
 	
 	@GetMapping(path = "/deposit/{fiftys}/{twentys}/{tens}/{fives}")
 	public String deposit(@PathVariable int fiftys, @PathVariable int twentys, @PathVariable int tens, @PathVariable int fives) {
-		return safeService.deposit(fiftys, twentys, tens, fives) + ", New Account Balance: " + accountService.showBalance() + ", New Safe Balance: " + safeService.displaySafeContents();
+		return safeService.deposit(fiftys, twentys, tens, fives) + ",\n New Account Balance: " + accountService.showBalance() + ",\n New Safe Balance: " + safeService.displaySafeContents();
 	}
 }

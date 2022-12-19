@@ -16,7 +16,6 @@ public class AccountService {
 	private AccountRepository accountRepo;
 	
 	private Account signedInAccount = null;
-	private List<Account> accounts = new ArrayList<>();
 	
 	public void createAccount(int accNum, int pin, double balance, double overdraft) {
 		Account newAccount = new Account();

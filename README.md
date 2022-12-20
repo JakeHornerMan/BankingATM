@@ -1,7 +1,7 @@
 # BankingATM
 
 API Calls 
--localhost:9090/atm/safe - display safe amounts.
+/n-localhost:9090/atm/safe - display safe amounts.
 -localhost:9090/atm/createAccount - create account with funds.
 -localhost:9090/atm/signIn - sign in o any account on database.
 -localhost:9090/atm/signOut - sign out of the account.

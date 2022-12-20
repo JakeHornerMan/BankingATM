@@ -167,7 +167,6 @@ public class SafeService {
 
 	public String deposit(Safe tempSafe) {
 		if(accountService.isSignedIn()) {
-//			Safe tempSafe = new Safe(0, fiftys, twentys, tens, fives);
 			int amount = tempSafe.totalInSafe();
 			accountService.deposit(amount);
 			addToSafe(tempSafe);

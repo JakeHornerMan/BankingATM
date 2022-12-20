@@ -9,12 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountRequest {
-
-	private int id;
-	private int accountNumber;
-	private int pin;
-	private Double balance;
-	private Double overdraft;
-	
+public class DepositRequest {
+	public int id;
+	public int fiftys;
+	public int twentys;
+	public int tens;
+	public int fives;
 }

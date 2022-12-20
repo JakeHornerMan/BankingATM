@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jake.models.Account;
 import com.jake.repos.AccountRepository;
+import com.jake.requests.AccountRequest;
 
 @Service
 public class AccountService {
@@ -17,14 +18,19 @@ public class AccountService {
 	
 	private Account signedInAccount = null;
 	
-	public void createAccount(int accNum, int pin, double balance, double overdraft) {
-		Account newAccount = new Account();
-		newAccount.setAccountNumber(accNum);
-		newAccount.setPin(pin);
-		newAccount.setBalance(balance);
-		newAccount.setOverdraft(overdraft);
-		
-		signedInAccount = accountRepo.save(newAccount);
+//	public void createAccount(int accNum, int pin, double balance, double overdraft) {
+//		Account newAccount = new Account();
+//		newAccount.setAccountNumber(accNum);
+//		newAccount.setPin(pin);
+//		newAccount.setBalance(balance);
+//		newAccount.setOverdraft(overdraft);
+//		
+//		signedInAccount = accountRepo.save(newAccount);
+//	}
+	
+	public Account createAccount(Account account) {
+		signedInAccount = accountRepo.save(account);
+		return signedInAccount;
 	}
 	
 	public String signIn(int accountNumber, int pin) {
@@ -84,4 +90,6 @@ public class AccountService {
 	public void deposit(int amount) {
 		signedInAccount.setBalance(signedInAccount.getBalance() + amount);
 	}
+
+	
 }

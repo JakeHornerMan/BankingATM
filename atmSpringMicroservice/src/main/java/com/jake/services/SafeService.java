@@ -165,4 +165,18 @@ public class SafeService {
 		atmSafe.setFives(atmSafe.getFives() + tempSafe.getFives());
 	}
 
+	public String deposit(Safe tempSafe) {
+		if(accountService.isSignedIn()) {
+//			Safe tempSafe = new Safe(0, fiftys, twentys, tens, fives);
+			int amount = tempSafe.totalInSafe();
+			accountService.deposit(amount);
+			addToSafe(tempSafe);
+			
+			return "Money deposited into signed in Account: " + amount;
+		}
+		else {
+			return "Please sign in to an account.";
+		}
+	}
+
 }
